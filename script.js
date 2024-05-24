@@ -8,7 +8,7 @@ async function init() {
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
 
-    webcam = new tmImage.Webcam(400, 300, true);
+    webcam = new new Webcam(400, 300, true);
     await webcam.setup();
     await webcam.play();
     window.requestAnimationFrame(loop);
