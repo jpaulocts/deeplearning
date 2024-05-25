@@ -8,16 +8,28 @@ async function init() {
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
 
-    webcam = new new Webcam(400, 300, true);
+    webcam = new tmImage.Webcam(400, 300, true);
     await webcam.setup();
     await webcam.play();
     window.requestAnimationFrame(loop);
 
-    document.getElementById("webcam").appendChild(webcam.canvas);
+    
+
+       // append elements to the DOM
+     document.getElementById("webcam-container").appendChild(webcam.canvas);
+     labelContainer = document.getElementById("label-container");
+     for (let i = 0; i < maxPredictions; i++) { // and class labels
+         labelContainer.appendChild(document.createElement("div"));
+     }
+
+    
 }
+
+
 
 async function loop() {
     webcam.update();
+    await predict()
     window.requestAnimationFrame(loop);
 }
 
